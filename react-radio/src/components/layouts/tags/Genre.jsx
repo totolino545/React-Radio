@@ -5,7 +5,7 @@ function Genre({ tags }) {
     const [selectedGenre, setSelectedGenre] = useState("");
     const [selectedSubGenre, setSelectedSubGenre] = useState("");
     const [subGenres, setSubGenres] = useState([]);
-    const { listRadios } = useRadios();
+    const { tagParam } = useRadios();
 
     const handleGenreChange = (e) => {
         const genre = e.target.value;
@@ -33,7 +33,7 @@ const handleInputChange = (e) => { handleGenreChange(e.target.value); };
     };
     const handleSubGenreChange = (subGenre) => {
         setSelectedSubGenre(subGenre);        
-        listRadios(subGenre)
+        tagParam(subGenre)
     };
     
 
@@ -114,7 +114,7 @@ const handleInputChange = (e) => { handleGenreChange(e.target.value); };
                                 ? "bg-primary-container text-on-primary-container border-primary border-4 border-indigo-500"
                                 : "bg-surface-container text-on-surface-variant border-outline-variant/30 hover:bg-surface-variant"
                             }
-    `}
+                                `}
                         
                         
                     >

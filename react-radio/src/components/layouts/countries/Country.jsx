@@ -4,7 +4,7 @@ import { useRadios } from "../../../context/RadiosContext"
 
 function Country({ countries }) {
     const [selectedCountry, setSelectedCountry] = useState(null);
-    const { listRadios } = useRadios();
+    const { countryParam, countRadios } = useRadios();
 
     // Cuando cambia el datalist
     const handleCountryChange = (e) => {
@@ -18,8 +18,12 @@ function Country({ countries }) {
         setSelectedCountry(country || null);
 
     };
-    const handleSelectedCountry = () => {
-        useRadios(selectedCountry)
+    const handleSelectedCountry = (country) => {
+        setSelectedCountry(country);
+        countryParam(country);
+        console.log(country);
+        console.log(countRadios(country));
+        
     }
 
     // Limpiar selección
@@ -30,11 +34,22 @@ function Country({ countries }) {
         <section className="mb-section-gap mt-8">
             <h3 className="font-headline-md text-headline-md text-on-surface mb-4">Top Countries</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <label className="glass-card rounded-xl p-3 flex items-center cursor-pointer min-h-16">
+                <label className={`
+                rounded-full 
+                p-3 
+                flex items-center 
+                cursor-pointer 
+                min-h-16 
+                border
+                ${selectedCountry
+                        ? "bg-primary-container text-on-primary-container border-primary border-4 border-indigo-500"
+                        : "bg-surface-container text-on-surface-variant border-outline-variant/30 hover:bg-surface-variant"
+                    }
+                                `}
+                >
                     <span className="w-10 material-symbols-outlined text-secondary">flag</span>
                     <div className="relative flex-1 items-center">
-                        <div className="rounded-lg flex items-center justify-center bg-surface-container-highest">
-
+                        <div className="rounded-full flex items-center justify-center bg-surface-container-highest">
 
                             <input
                                 type="text"
@@ -43,11 +58,11 @@ function Country({ countries }) {
                                 value={selectedCountry?.name || ""}
                                 onChange={handleCountryChange}
                                 placeholder="Seleccionar país"
-                                className="
-                                    glass-card
+                                className="                                  
                                     cursor-pointer
                                     w-full
-                                    outline-none
+                                    border-none
+                                    border-outline
                                     bg-transparent
                                 "
                             />
@@ -96,49 +111,62 @@ function Country({ countries }) {
                             ✕
                         </button>
                     )}
+                    {selectedCountry && (
+                        <button
+                            type="button"
+                            onClick={() => handleSelectedCountry(selectedCountry)}
+                            className="
+                                flex-shrink-0
+                                w-7
+                                h-7
+                                rounded-full
+                                flex
+                                items-center
+                                justify-center
+                                text-gray-400
+                                hover:bg-red-500
+                                hover:text-white
+                                transition-colors
+                            "
+                        >
+                            Ok
+                        </button>
+                    )}
                 </label>
 
                 {countries.slice(0, 7).map((country) => (
                     <button
                         key={country.name}
-                        onClick={() => handleSelectedCountry(country.name)}
+                        onClick={() => handleSelectedCountry(country)}
                         className={`
-                                // flex-shrink-0
-                                // px-6
-                                // py-2
-                                // rounded-full
-                                // font-label-sm
-                                // text-label-sm
-                                // transition-colors
-                                // border
+                                flex-shrink-0
+                                px-6
+                                py-2
+                                rounded-full
                                 
-                                `}
-                        
-                        
-                    >
-
-                    <div key={country.name} className={`
-                        glass-card
-                        p-4 
-                        rounded-xl 
-                        flex 
-                        items-center 
-                        gap-3 
-                        cursor-pointer
-                        ${selectedCountry === country.name
+                                font-label-sm
+                                text-label-sm
+                                transition-colors
+                                border
+                                ${selectedCountry === country
                                 ? "bg-primary-container text-on-primary-container border-primary border-4 border-indigo-500"
                                 : "bg-surface-container text-on-surface-variant border-outline-variant/30 hover:bg-surface-variant"
                             }
-                        `}>
-                        <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-surface-container-highest">
-                            <span className="material-symbols-outlined text-secondary">flag</span>
+                                `}
+
+
+                    >
+
+                        <div key={country.name} className="p-4 rounded-xl flex items-center  gap-3 cursor-pointer">
+                            <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-surface-container-highest">
+                                <span className="material-symbols-outlined text-secondary">flag</span>
+                            </div>
+                            <div>
+                                <p className="font-label-sm text-label-sm text-on-surface">{country.name}</p>
+                                <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter">{country.stationcount} Stations</p>
+                            </div>
                         </div>
-                        <div>
-                            <p className="font-label-sm text-label-sm text-on-surface">{country.name}</p>
-                            <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter">{country.stationcount} Stations</p>
-                        </div>
-                    </div>
-</button>
+                    </button>
                 ))}
 
 
