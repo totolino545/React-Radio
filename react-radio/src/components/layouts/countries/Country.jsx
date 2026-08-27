@@ -23,7 +23,7 @@ function Country({ countries }) {
         countryParam(country);
         console.log(country);
         console.log(countRadios(country));
-        
+
     }
 
     // Limpiar selección
@@ -33,13 +33,13 @@ function Country({ countries }) {
     return (
         <section className="mb-section-gap mt-8">
             <h3 className="font-headline-md text-headline-md text-on-surface mb-4">Top Countries</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <label className={`
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                <label className={`              
                 rounded-full 
-                p-3 
+                w-full
+                px-2
                 flex items-center 
-                cursor-pointer 
-                min-h-16 
+                cursor-pointer               
                 border
                 ${selectedCountry
                         ? "bg-primary-container text-on-primary-container border-primary border-4 border-indigo-500"
@@ -47,9 +47,21 @@ function Country({ countries }) {
                     }
                                 `}
                 >
-                    <span className="w-10 material-symbols-outlined text-secondary">flag</span>
-                    <div className="relative flex-1 items-center">
-                        <div className="rounded-full flex items-center justify-center bg-surface-container-highest">
+                    <span className="material-symbols-outlined text-secondary ml-1">flag</span>
+                    {selectedCountry && (
+                        <p className="
+                                mt-1
+                                ml-1
+                                text-[8px]
+                                text-on-surface-variant
+                                uppercase
+                                tracking-tighter
+                            ">
+                            {selectedCountry.stationcount?.toLocaleString()}
+                        </p>
+                    )}
+                    <div className="relative flex-1 items-center overflow-x-auto hide-scrollbar">
+                        <div className="rounded-full flex items-center justify-center bg-surface-container-highest ">
 
                             <input
                                 type="text"
@@ -61,6 +73,8 @@ function Country({ countries }) {
                                 className="                                  
                                     cursor-pointer
                                     w-full
+                                    text-xs
+                                    font-medium 
                                     border-none
                                     border-outline
                                     bg-transparent
@@ -76,18 +90,7 @@ function Country({ countries }) {
                             ))}
                         </datalist>
 
-                        {selectedCountry && (
-                            <p className="
-                                mt-1
-                                ml-3
-                                text-[10px]
-                                text-on-surface-variant
-                                uppercase
-                                tracking-tighter
-                            ">
-                                {selectedCountry.stationcount?.toLocaleString()} Stations
-                            </p>
-                        )}
+
                     </div>
 
                     {selectedCountry && (
@@ -134,18 +137,14 @@ function Country({ countries }) {
                     )}
                 </label>
 
-                {countries.slice(0, 7).map((country) => (
+                {countries.slice(0, 5).map((country) => (
                     <button
                         key={country.name}
                         onClick={() => handleSelectedCountry(country)}
                         className={`
                                 flex-shrink-0
-                                px-6
-                                py-2
-                                rounded-full
-                                
-                                font-label-sm
-                                text-label-sm
+                                px-6                               
+                                rounded-full                               
                                 transition-colors
                                 border
                                 ${selectedCountry === country
@@ -157,13 +156,13 @@ function Country({ countries }) {
 
                     >
 
-                        <div key={country.name} className="p-4 rounded-xl flex items-center  gap-3 cursor-pointer">
-                            <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-surface-container-highest">
+                        <div key={country.name} className="p-2 rounded-xl flex items-center  gap-3 cursor-pointer">
+                            <div className="w-10 h-6 rounded-lg flex items-center justify-center inline-block align-baseline gap-2 bg-surface-container-highest">
                                 <span className="material-symbols-outlined text-secondary">flag</span>
+                                <p className="text-[8px]   tracking-tighter">{country.stationcount} </p>
                             </div>
-                            <div>
-                                <p className="font-label-sm text-label-sm text-on-surface">{country.name}</p>
-                                <p className="text-[10px] text-on-surface-variant uppercase tracking-tighter">{country.stationcount} Stations</p>
+                            <div className="flex justify-center w-full">
+                                <p className="font-label-sm text-[10px] text-on-surface line-clamp-1">{country.name}</p>
                             </div>
                         </div>
                     </button>

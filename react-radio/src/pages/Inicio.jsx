@@ -9,10 +9,8 @@ import Playing from '../components/layouts/Playing'
 const Inicio = () => {
   return (
     <>
-      <main className="pt-20 px-container-padding-mobile max-w-7xl mx-auto">
+      <main className="pt-8 px-5 max-w-7xl mx-auto">
         <Hero />
-        <TagsListContainer />
-        <CountriesListContainer />
         <Stations />
         {/* <Visualizer /> */}
         <Playing />

@@ -25,17 +25,17 @@ function Genre({ tags }) {
 
         setSubGenres(filtered);
     };
-const handleInputChange = (e) => { handleGenreChange(e.target.value); };
+    const handleInputChange = (e) => { handleGenreChange(e.target.value); };
 
     const clearGenre = () => {
         setSelectedGenre("");
         setSubGenres([]);
     };
     const handleSubGenreChange = (subGenre) => {
-        setSelectedSubGenre(subGenre);        
+        setSelectedSubGenre(subGenre);
         tagParam(subGenre)
     };
-    
+
 
     return (
         <section className="mb-gutter">
@@ -56,17 +56,19 @@ const handleInputChange = (e) => { handleGenreChange(e.target.value); };
                         value={selectedGenre}
                         onChange={handleGenreChange}
                         placeholder="🎵 Género"
-                        className="
+                        className={`}
                             px-6
                             py-2
                             pr-10
                             rounded-full
                             bg-transparent
-                            hover:bg-surface-variant
-                            border
-                            border-outline-variant/30
-                            outline-none
-                        "
+                            border                            
+                            ${selectedGenre
+                                ? "bg-primary-container text-on-primary-container border-primary border-4 border-indigo-500"
+                                : "bg-surface-container text-on-surface-variant border-outline-variant/30 hover:bg-surface-variant"
+                            }
+                                `}
+
                     />
 
                     <datalist id="genres">
@@ -115,8 +117,8 @@ const handleInputChange = (e) => { handleGenreChange(e.target.value); };
                                 : "bg-surface-container text-on-surface-variant border-outline-variant/30 hover:bg-surface-variant"
                             }
                                 `}
-                        
-                        
+
+
                     >
                         {tag.name}
                     </button>
