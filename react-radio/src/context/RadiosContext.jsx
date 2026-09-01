@@ -37,11 +37,12 @@ export const RadiosProvider = ({ children }) => {
         
         
     // }
-    console.log(countRadios);
+    console.log(countRadios, provider1.length);
 
     return (
         <RadiosContext.Provider value={{
             provider1,
+            countRadios,
             loading,
             error,
             tag,

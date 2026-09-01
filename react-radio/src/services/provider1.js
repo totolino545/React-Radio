@@ -1,20 +1,32 @@
-
 import { ofetch } from "ofetch";
 
-export const getProvider1 = (tag, country) => { 
-    
+export const getTopVoted = () => {
+
     return ofetch(
-        'https://de1.api.radio-browser.info/json/stations/search',
+        "https://de1.api.radio-browser.info/json/stations/topvote",
         {
             query: {
-                tag: tag || undefined,
-                country: country || undefined,
-                hidebroken: true,
-                reverse: "true",
-                order: "stationcount"
-                
+                limit: 20,
+                hidebroken: true
             }
         }
     );
-        
-}
+
+};
+
+
+export const getProvider1 = (tag, country) => {
+
+    return ofetch(
+        "https://de1.api.radio-browser.info/json/stations/search",
+        {
+            query: {
+                tag,
+                country,
+                hidebroken: true,
+                limit: 1000
+            }
+        }
+    );
+
+};

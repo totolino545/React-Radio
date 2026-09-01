@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useRadios } from "../context/RadiosContext"
 import logo from "../assets/imagen.jpg"
-import TagsListContainer from '../components/layouts/tags/TagsListContainer'
-import CountriesListContainer from '../components/layouts/countries/CountriesListContainer'
+import './styles/discover.css'
+
 
 const Discover = () => {
 
@@ -22,7 +22,7 @@ const Discover = () => {
                         <h2 className="font-headline-md text-headline-md text-on-surface my-6">Discovery Feed</h2>
                         {/* <!-- Station Card 1 --> */}
                         {provider1.map(radios =>
-                            <div key="radios.lastlocalchecktime_iso8601" className="group flex items-center p-4 rounded-2xl bg-surface-container-low border border-outline-variant/10 hover:border-secondary/40 transition-all duration-300 cursor-pointer hover:bg-surface-container">
+                            <div key="radios.id" className="group flex items-center p-4 rounded-2xl bg-surface-container-low border border-outline-variant/10 hover:border-secondary/40 transition-all duration-300 cursor-pointer hover:bg-surface-container">
                                 <div className="relative w-20 h-20 flex-shrink-0 rounded-xl overflow-hidden mr-4">
                                     <img className="w-full h-full object-cover"
                                         data-alt="Favicon de la Radio"

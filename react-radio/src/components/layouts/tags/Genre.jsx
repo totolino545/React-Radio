@@ -33,6 +33,7 @@ function Genre({ tags }) {
     };
     const handleSubGenreChange = (subGenre) => {
         setSelectedSubGenre(subGenre);
+        setSelectedGenre(subGenre)
         tagParam(subGenre)
     };
 
